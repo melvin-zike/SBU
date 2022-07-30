@@ -1,0 +1,21 @@
+@import "../../app.scss";
+
+.addReportTitle{
+
+
+  @include mobile {
+    margin-left: 30px;
+  }
+}
+
+.main{
+    display: flex;
+
+}
+
+.createProduct{
+    flex: 5;
+}
+
+
+
