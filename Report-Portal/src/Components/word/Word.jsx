@@ -16,7 +16,7 @@ const Word = () => {
                       class="seticon mdi mdi-arrow-right-bold"
                       aria-hidden="true"
                     ></i>
-                    <span>NEWSLETTER SECTION...</span>
+                    <span>NEWSLETTER SECTION (<i>coming soon...)</i></span>
                   </a>
                   <div id="Toggle-1" class="collapse show multi-collapse">
                     <div class="card-body widget-content">

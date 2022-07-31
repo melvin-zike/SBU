@@ -39,22 +39,14 @@ const Awards = () => {
                         class="img-fluid"
                       />
                       <p class="mt-2">
-                        And is full of waffle to It has multiple paragraphs and
-                        is full of waffle to pad out the comment. Usually, you
-                        just wish these sorts of comments would come to an
-                        end.multiple paragraphs and is full of waffle to pad out
-                        the comment..
+                        Congrats to our esteemed sister..
                       </p>
                     </div>
                   </div>
                   <div class="tab-pane p-20" id="messages" role="tabpanel">
                     <div class="p-20">
                       <p>
-                        And is full of waffle to It has multiple paragraphs and
-                        is full of waffle to pad out the comment. Usually, you
-                        just wish these sorts of comments would come to an
-                        end.multiple paragraphs and is full of waffle to pad out
-                        the comment..
+                       Congrats..
                       </p>
                       <img
                         src="/assets/images/media.jpeg"

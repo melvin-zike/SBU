@@ -10,16 +10,6 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import PagenotFound from "./pages/pagenotfound/PagenotFound";
 
-import Product from "./pages/product/Product";
-import ProductList from "./pages/productList/ProductList";
-import ListList from "./pages/listList/ListList"
-import List from "./pages/list/List";
-import NewList from "./pages/newList/NewList";
-
-
-import NewProduct from "./pages/newProduct/NewProduct";
-import Ads from "./pages/ads/Ads";
-import AdList from "./pages/adsList/AdsList";
 import CreateReport from './pages/createreport/CreateReport';
 import ScoreCard from './pages/scorecard/ScoreCard';
 import Testimony from './pages/testimony/Testimony';
@@ -90,34 +80,7 @@ function App () {
              <Route path="/score-card">
              {!user ? <Redirect to="/login" /> : <ScoreCard />} 
              </Route>
-
-             <Route path="/movies">
-            <ProductList />
-          </Route>
-
-          <Route path="/product/:productId">
-            <Product />
-          </Route>
-
-          <Route path="/newproduct">
-            <NewProduct />
-          </Route>
-
-          <Route path="/ads">
-            <Ads />
-          </Route>
-          <Route path="/adlist">
-            <AdList />
-          </Route>
-          <Route path="/lists">
-            <ListList />
-              </Route>
-          <Route path="/list/:listId">
-                <List />
-          </Route>
-          <Route path="/newlist">
-              <NewList />
-            </Route>
+          
      
          <Route component={PagenotFound} />
          

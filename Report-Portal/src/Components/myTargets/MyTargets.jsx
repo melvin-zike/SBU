@@ -84,6 +84,7 @@ const MyTargets = () => {
     <div class="card">
                 <div class="card-body ">
                   <h4 class="card-title">My Reports</h4>
+                  <hr />
                 </div>
                 <div class="comment-widgets scrollable" style={{height: "500px"}}>
                   {/* <!-- Comment Row --> */}

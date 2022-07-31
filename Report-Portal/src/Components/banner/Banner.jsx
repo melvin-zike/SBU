@@ -16,6 +16,7 @@ import Notice from "../notice/Notice";
 import Chats from "../chats/Chats";
 import Testimonies from "../testimonies/Testimonies";
 import Word from "../word/Word";
+import CreateGoalsModal from "../creategoalsmodal/CreateGoalsModal";
 
 
 
@@ -78,7 +79,7 @@ const Banner = ({type}) => {
                 </div>
               </div>
             </div>
- <GoalModal />               
+ <CreateGoalsModal />               
           </div>
          
          

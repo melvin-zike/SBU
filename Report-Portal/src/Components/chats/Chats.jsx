@@ -5,7 +5,7 @@ const Chats = () => {
     <div>
          <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Chat With Admin</h4>
+                  <h4 class="card-title">All Members Chat (<i>coming soon...)</i></h4>
                   <div class="chat-box scrollable" style={{height: "475px"}}>
                     {/* <!--chat Row --> */}
                     <ul class="chat-list">

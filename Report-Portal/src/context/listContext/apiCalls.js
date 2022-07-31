@@ -18,7 +18,7 @@ const axiosInstance = axios.create({
 export const getLists = async (dispatch) => {
   dispatch(getListsStart());
   try {
-    const res = await axiosInstance.get("/lists", {
+    const res = await axiosInstance.get("/goals", {
       headers: {
         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
       },
@@ -33,7 +33,7 @@ export const getLists = async (dispatch) => {
 export const createList = async (list, dispatch) => {
   dispatch(createListStart());
   try {
-    const res = await axiosInstance.post("/lists", list, {
+    const res = await axiosInstance.post("/goals", list, {
       headers: {
         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
       },
@@ -48,7 +48,7 @@ export const createList = async (list, dispatch) => {
 export const deleteList = async (id, dispatch) => {
   dispatch(deleteListStart());
   try {
-    await axiosInstance.delete("/lists/" + id, {
+    await axiosInstance.delete("/goals/" + id, {
       headers: {
         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
       },
