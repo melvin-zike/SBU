@@ -8,7 +8,9 @@ import {getMovies, deleteMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 import ModalForm from '../modalform/ModalForm';
 
-
+const today = new Date() 
+const priorDate = new Date().setDate(today.getDate() - 3) 
+console.log(priorDate);
 
 const MyTargets = () => {
     const {movies, dispatch} = useContext(MovieContext);
@@ -16,8 +18,6 @@ const MyTargets = () => {
     const [posts, setPosts] = useState([]);
     const [edit, setEdit] = useState([]);
     const [edits, setEdits] = useState({});
-    
-    console.log(edit)
     
 
 
@@ -61,7 +61,8 @@ const MyTargets = () => {
               },
             })
            
-              setEdits(res.data)            
+              setEdits(res.data);
+              console.log(res.data);            
           
              } catch(err){
             console.log(err);
@@ -106,7 +107,11 @@ const MyTargets = () => {
                           {targets.desc}
                      </span>
                      <div class="comment-footer">
-                       <span class="text-muted float-end">{format(targets.createdAt)}</span>
+                      {targets.createdAt < priorDate ? <span class="text-red text-muted float-end">{format(targets.createdAt)}</span> 
+                      :
+                      <span class="text-muted float-end">{format(targets.createdAt)}</span>
+                      }
+                      
                        <button
                          type="button"
                          class="btn btn-warning btn-sm text-white"
@@ -127,12 +132,12 @@ const MyTargets = () => {
                    </div>
 
                    
+                {/* EDIT MODAL------------------------------------       */}
+                  
                    </div>
                 
                  ))}
-
-                {/* EDIT MODAL------------------------------------       */}
-            <ModalForm edits={edits}/>
+    <ModalForm edits={edits}/>
      </div>
 </div>
 

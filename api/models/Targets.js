@@ -8,6 +8,10 @@ const TargetSchema = new mongoose.Schema({
     username: {
         type: String,
     },
+    name: {
+        type: String,
+        required:true
+    },
    comments: {
        type: [
            {
@@ -54,6 +58,10 @@ const TargetSchema = new mongoose.Schema({
     },
     personalscore:{
         type: Number
+    },
+    achievedscore:{
+        type: Number,
+        default: 0
     },
     
     

@@ -94,18 +94,22 @@ router.put('/:id/credit', verify, async (req, res ) => {
   }
 })
 
-//comment a post
-router.put("/:id/comments", verify, async(req, res) => {
-  try{
-      const target = await Target.findById(req.params.id);
-     if(!target.comments.includes(req.body.userId) || target.comments.includes(req.body.userId)){
-      await target.updateOne({$push: { comments: req.body }});
-       return res.status(200).json("comment succesfull");
-    }
-  }catch(err){
-      return res.send(500).json(err);
+
+
+//edit achieved score in targets
+router.put('/:id/achieve', verify, async (req, res ) => {
+  if(req.body.userId !== req.params.id){
+      try{
+          const target = await Target.findById(req.body.targetId);
+             await target.updateOne({$inc: {achievedscore: req.body.achieved}});
+             return res.status(200).json("You have added a score!");
+    
+      }catch(err){
+        return res.status(500).json(err)
+      }
+  }else{
+      return res.status(403).json("you cannot vote for yourself")
   }
-  
 })
 
 //GET ALL

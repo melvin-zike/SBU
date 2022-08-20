@@ -4,8 +4,8 @@ import Sidebar from '../../Components/sidebar/Sidebar'
 import { Link } from "react-router-dom";
 import "./createreport.scss";
 import storage from "../../firebase";
-import { createMovie, getMovies, deleteMovie } from "../../context/movieContext/apiCalls";
-import { MovieContext } from "../../context/movieContext/MovieContext";
+import { deleteTransaction } from "../../context/transactionContext/apiCalls";
+import { TransactionContext } from "../../context/transactionContext/TransactionContext";
 import Toggle from "../toggle/Toggle"
 import { useHistory } from "react-router-dom";
 import { format } from "timeago.js";
@@ -15,7 +15,7 @@ import CreateReportModal from '../../Components/createreportmodal/CreateReportMo
 
 
 const CreateReport = () => {
-  const {movies, dispatch} = useContext(MovieContext);
+  const {transactions, dispatch} = useContext(TransactionContext);
     const [list, setList] = useState(null);
   const history = useHistory()
   const { user } = useContext(AuthContext);
@@ -78,8 +78,8 @@ const CreateReport = () => {
     }, [edit]);
   
      const handleDelete = (id) => {
-      deleteMovie(id, dispatch)
-      window.location.reload();
+      deleteTransaction(id, dispatch)
+     window.location.reload();
      };
 
 
@@ -136,7 +136,7 @@ const CreateReport = () => {
                      <div class="comment-footer">
                        <span class="text-muted float-end">{format(targets.createdAt)}</span>
 
-                       <Link className="links" to={{pathname: `/single/report/${targets._id}`, targets: targets}}>
+                       <Link className="links" to={{pathname: `/single/${targets._id}`, targets: targets}}>
                        <button
                          type="button"
                          class="btn btn-warning btn-sm text-white"

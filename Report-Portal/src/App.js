@@ -19,6 +19,7 @@ import NewUser from './pages/newuser/NewUser';
 import Members from './pages/members/Members';
 import ReportsPage from './pages/reportspage/ReportsPage';
 import SingleReportsPage from './pages/singlereportspage/SingleReportsPage';
+import MemberScoreCard from './pages/memberscorecard/MemberScoreCard';
 
 //components
 
@@ -65,8 +66,11 @@ function App () {
          {!user ? <Redirect to="/login" /> : <ReportsPage />}
          </Route>
 
-             <Route exact path="/single/report/:id">
+             <Route exact path="/single/:id">
          {!user ? <Redirect to="/login" /> : <SingleReportsPage />}
+         </Route>
+             <Route exact path="/members-scorecard/:fullname">
+         {!user ? <Redirect to="/login" /> : <MemberScoreCard />}
          </Route>
 
              <Route path="/profile">

@@ -10,6 +10,8 @@ import Ticker from "react-ticker"
 // import { AuthContext } from '../../context/authContext/AuthContext';
 
 import ScoreCardItem from './ScoreCardItem';
+import { Edit, Markunread, Save, Send } from '@material-ui/icons';
+import ScoreForm from './ScoreForm';
 
 
 const ScoreCardList = ({type}) => {
@@ -18,13 +20,42 @@ const ScoreCardList = ({type}) => {
 
     const [lists, setLists] = useState([]);
     const [genre, setGenre] = useState(null);
-    const [reports, setReports] = useState([]);
+    const [reports, setReports] = useState([0]);
+    const [open, setOpen] = useState(false);
     const { user } = useContext(AuthContext);
     const axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_API_URL
     });
   
-    const fullname = user.fullname;
+  const fullname = user.fullname;
+
+  // TOTAL PERSONAL SCORE-----
+   const addition = reports.map((tot) => {
+    return tot.personalscore;   
+  })
+
+  const total = addition.reduce((a, b) => {
+    return a+ b;
+  })
+ 
+// TOTAL OVERALL SCORE----
+   const addition1 = reports.map((tot1) => {
+    return tot1.overallscore;   
+  })
+
+  const total1 = addition1.reduce((a, b) => {
+    return a+ b;
+  })
+ 
+
+   const addition2 = reports.map((tot2) => {
+    return tot2.achievedscore;   
+  })
+
+  const total2 = addition2.reduce((a, b) => {
+    return a+ b;
+  })
+ 
   
     useEffect(() => {
       const getRandomLists = async () => {
@@ -34,8 +65,10 @@ const ScoreCardList = ({type}) => {
               token: "Bearer " + JSON.parse(localStorage.getItem("user"))?.accessToken,
             },
           });
+          
           // console.log(res)
-          setLists(res.data)
+          setLists(res.data);
+         
         }catch(err){
           console.log(err);
         }
@@ -55,9 +88,7 @@ const ScoreCardList = ({type}) => {
             },
           })
          
-            setReports(res.data)   
-            console.log(res.data);         
-        
+            setReports(res.data);
            } catch(err){
           // console.log(err);
         }
@@ -66,8 +97,11 @@ const ScoreCardList = ({type}) => {
       fetchPosts();
     }, [fullname, user?._id]);
     
-  
+    const handleform = () => {
+      setOpen(open == false ? true : false);
+    }
     
+   
     
     return (
         <div className='card'>
@@ -75,7 +109,7 @@ const ScoreCardList = ({type}) => {
         <Ticker className='ticker-container' mode="smooth">
              {({ index }) => (
                <>
-               <p className='challenge-ticker'>Vote your favorite Mictok Upcoming artist... </p>
+               <p className='challenge-ticker'>Win our prestigious staff of the month award... </p>
                </>
              )
 
@@ -94,13 +128,15 @@ const ScoreCardList = ({type}) => {
                 <th scope="col">Suggestions/Challenges If Any</th>
                 <th scope="col">OveraLL Posible Score</th>
                 <th scope="col">Personal Score</th>
-                <th scope="col">Achieved Score(<i style={{color: 'red'}}>for the head of deapartment</i>)</th>
+                <th scope="col">Achieved Score(<i style={{color: 'red'}}>for the head of deapartment</i>)
+                {user.isAdmin == true ? <Edit onClick={handleform}/> : ''}
+                </th>
         </tr>
      </thead>
     <tbody>
        
        {reports.map((report) => (
-              <tr key = {report.id}>
+              <tr key = {report._id}>
                 <th className='headrow' scope="row">-</th>
                 <td className='bg-primary firstrow'><p>{report.desc}</p></td>
                 <td>{report.time == 1 ? 'Daily' : report.time == 2 ? 'Weekly' : report.time == 3 ? 'Monthly' : ''}</td>
@@ -109,12 +145,37 @@ const ScoreCardList = ({type}) => {
                 <td className='bg-warning firstrow'>{report.suggestions}</td>
                 <td>{report.overallscore}</td>
                 <td>{report.personalscore}</td>
+                <td>{report.achievedscore}
+                {
+                open == true ? 
+                <ScoreForm reps={report}/>
+                 : ''}
+                </td>
+                
               </tr>
-            
-            ))}
        
-  
+                
+            ))}
     </tbody>
+
+<br />
+<hr />
+
+<tbody>
+              <tr>
+                <th className='headrow' scope="row">-</th>
+                <td className='bg-primary firstrow'><p>-----</p></td>
+                <td>-----</td>
+                <td>-----</td>
+                <td className='bg-success firstrow'>-----</td>
+                <td className='bg-warning firstrow'>Total</td>
+                <td>{total1}</td>
+                <td>{total}</td>
+                <td>{total2}</td>
+              </tr>
+    </tbody>
+
+
   </table>
          
         </div>

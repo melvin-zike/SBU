@@ -38,6 +38,11 @@ const CreateReportModal = () => {
       </div>
     <div class="modal-body">
      <div class="mb-3">
+    <label for="targets" class="form-label">Name</label>
+    <textarea class="form-control" placeholder= 'e.g: AUGUST2022' id="targets" rows="3" name='name'  onChange={handleChange}></textarea>
+     </div>
+
+     <div class="mb-3">
     <label for="targets" class="form-label">Executive Summary</label>
     <textarea class="form-control" id="targets" rows="3" name='executivesummary'  onChange={handleChange}></textarea>
      </div>

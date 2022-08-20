@@ -5,6 +5,10 @@ const ReportSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    name: {
+        type:String,
+        required:true
+    },
     executivesummary: {
         type: String,
     },

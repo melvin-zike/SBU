@@ -8,8 +8,11 @@ import Toggle from "../toggle/Toggle";
 
 const SingleReportsPage = () => {
     const {id} = useParams();
+    const [text, setText] = useState('');
     const [reports, setReports ] = useState([]);
     const { user } = useContext(AuthContext);
+
+    console.log(reports);
 
     const axiosInstance = axios.create({
         baseURL: process.env.REACT_APP_API_URL
@@ -28,7 +31,7 @@ const SingleReportsPage = () => {
             })
            
               setReports(res.data)            
-              console.log(res.data);
+             
              } catch(err){
             // console.log(err);
           }
@@ -37,22 +40,36 @@ const SingleReportsPage = () => {
         fetchReports();
       }, [id, user?._id]);
 
-
+   //ADD COMMENTS
+  const addComment = async () => {
+    const credentials = {
+      postId: id,
+      userId: user._id,
+      body: text
+    }
+    const res = await axiosInstance.put(`/reports/${id}/comments`, credentials, {
+      headers: {
+        token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+      },
+    });
+    console.log(res.data)
+    window.location.reload();
+  };
 
 
   return (
     <div>
         <Navbar />
         <Toggle />
-    <div class="card mt-4">
+    <div className="card mt-4">
         <h2>Report</h2>
-              <div id="Toggle-1" class="collapse show multi-collapse">
+              <div id="Toggle-1" className="collapse show multi-collapse">
             
               
-              <p class="card-body widget-content">
+              <p className="card-body widget-content">
               {reports.executivesummary}
                 </p>
-                <p class="card-body widget-content">
+                <p className="card-body widget-content">
                 {reports.achievements}
                 {reports.testimonies}
                 {reports.financialincrease}
@@ -60,7 +77,7 @@ const SingleReportsPage = () => {
                 <a href={reports.pictures}>Link to pictures</a>
                 </p>
                 
-                <p class="card-body widget-content">
+                <p className="card-body widget-content">
                   {reports.Conclusion}
                 </p>
               </div>
@@ -69,10 +86,26 @@ const SingleReportsPage = () => {
              
             </div>
 
-    <div class="mb-3">
-  <label for="personalscore" class="form-label">HOD Comments</label>
-  <textarea class="form-control" id="challenges" rows="3" name='comments'></textarea>
-  <button className='btn btn-primary mt-2'>Comment</button>
+    <div className="mb-3">
+
+      {/* PORTAL EDITS-------------------- */}
+    <label htmlFor="personalscore" className="form-label">HOD's Comment</label>
+     
+      {reports.comments?.map((comment) => (
+        <div className="text-danger mx-3" id="challenges" rows="3" name='comments' key={comment._id}>
+           <i>{comment.body}</i>
+           
+        </div>
+      ))}
+    
+      {user.isAdmin === true && 
+      <div>
+      <label htmlFor="personalscore" className="form-label">Comments</label>
+      <textarea className="form-control" id="challenges" rows="3" name='comments' onChange={(e) => setText(e.target.value)}></textarea>
+      <button className='btn btn-primary mt-2' onClick={addComment}>Comment</button>
+      </div>
+      }
+  
         </div> 
 </div>
   )

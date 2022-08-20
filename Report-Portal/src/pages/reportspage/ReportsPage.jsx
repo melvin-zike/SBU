@@ -95,28 +95,28 @@ const ReportsPage = () => {
                 <div class="comment-widgets scrollable" style={{height: "500px"}}>
                   {/* <!-- Comment Row --> */}
                  {reports.map((targets ) =>(
-                    <div class="d-flex scrollable flex-row comment-row mt-0" key={targets._id}>
+                    <div className="d-flex scrollable flex-row comment-row mt-0" key={targets._id}>
                     <div>
-                        <div class="p-2">
+                        <div className="p-2">
                                       <img
                                         src="../assets/images/users/1.jpg"
                                         alt="user"
                                         width="50"
-                                        class="rounded-circle"
+                                        className="rounded-circle"
                                       />
                                     </div>
                     </div>
-                     <div class="comment-text w-100">
-                     <h6 class="font-medium">{user.username}</h6>
-                     <span class="mb-3 d-block">
+                     <div className="comment-text w-100">
+                     <h6 className="font-medium">{user.username}</h6>
+                     <span className="mb-3 d-block">
                           {targets.executivesummary}
                      </span>
-                     <div class="comment-footer">
-                       <span class="text-muted float-end">{format(targets.createdAt)}</span>
-                       <Link className="links" to={{pathname: `/single/report/${targets._id}`, targets: targets}}>
+                     <div className="comment-footer">
+                       <span className="text-muted float-end">{format(targets.createdAt)}</span>
+                       <Link className="links" to={{pathname: `/single-report/${targets._id}`, targets: targets}}>
                        <button
                          type="button"
-                         class="btn btn-warning btn-sm text-white"
+                         className="btn btn-warning btn-sm text-white"
                        >
                          View
                        </button>
@@ -124,7 +124,7 @@ const ReportsPage = () => {
                        
                        <button
                          type="button"
-                         class="btn btn-danger btn-sm text-white"
+                         className="btn btn-danger btn-sm text-white"
                          onClick={() => handleDelete(targets._id)}
                        >
                          Delete

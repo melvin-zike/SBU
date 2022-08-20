@@ -48,7 +48,7 @@ export const createTransaction = async (transaction, dispatch) => {
 export const deleteTransaction = async (id, dispatch) => {
   dispatch(deleteTransactionStart());
   try {
-    await axiosInstance.delete("/report/" + id, {
+    await axiosInstance.delete("/reports/" + id, {
       headers: {
         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
       },

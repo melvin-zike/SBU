@@ -38,8 +38,12 @@ const CreateTargetModal = () => {
       </div>
     <div class="modal-body">
       <div class="mb-3">
-    <label for="targets" class="form-label">Description</label>
-    <textarea class="form-control" id="targets" rows="3" name='desc'  onChange={handleChange}></textarea>
+       <label for="targets" class="form-label">Month/year</label>
+       <input type='text' class="form-control" id="targets" rows="3" name='name' placeholder="e.g: AUGUST 2022" onChange={handleChange} />
+      </div>
+      <div class="mb-3">
+       <label for="targets" class="form-label">Description</label>
+       <textarea class="form-control" id="targets" rows="3" name='desc'  onChange={handleChange}></textarea>
       </div>
      
       <select class="form-select" id='timeofcomplete' name='time' aria-label="Default select example" onChange={handleChange}>
