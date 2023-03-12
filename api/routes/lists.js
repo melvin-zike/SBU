@@ -5,7 +5,7 @@ const verify = require("../verifyToken");
 //CREATE
 
 router.post("/", verify, async (req, res) => {
-  if (req.user.isAdmin) {
+  if (req.user.isAdmin || req.user.id) {
     const newList = new List(req.body);
     try {
       const savedList = await newList.save();

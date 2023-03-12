@@ -5,13 +5,14 @@ import {AuthContextProvider} from "./context/authContext/AuthContext";
 import { MovieContextProvider } from "./context/movieContext/MovieContext";
 import { AdContextProvider } from "./context/adContext/AdContext";
 import { UserContextProvider } from "./context/userContext/UserContext";
+import { ListContextProvider } from './context/listContext/ListContext';
 import { TransactionContextProvider } from './context/transactionContext/TransactionContext';
 import App from './App';
 
 
 ReactDOM.render(
   <React.StrictMode>
- 
+    <ListContextProvider>
     <TransactionContextProvider>
     <UserContextProvider>
     <AuthContextProvider>
@@ -25,7 +26,7 @@ ReactDOM.render(
     </AuthContextProvider>
     </UserContextProvider>
     </TransactionContextProvider>
-  
+    </ListContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

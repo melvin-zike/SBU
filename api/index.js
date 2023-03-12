@@ -6,6 +6,8 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const reportRoute = require("./routes/reports");
 const goalRoute = require("./routes/goals");
+const calenderRoute = require("./routes/calender");
+const reportdayRoute = require("./routes/reportday");
 const movieRoute = require("./routes/movies");
 const targetRoute = require("./routes/target");
 const listRoute = require("./routes/lists");
@@ -16,7 +18,7 @@ const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 const transactionRoute = require("./routes/transactions");
 const path = require("path");
-const cors = require('cors');
+const cors = require("cors");
 
 dotenv.config();
 
@@ -37,13 +39,14 @@ app.use(cors());
 
 app.use(express.json());
 
-
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/reports", reportRoute);
 app.use("/api/goals", goalRoute);
+app.use("/api/calender", calenderRoute);
+app.use("/api/reportday", reportdayRoute);
 app.use("/api/movies", movieRoute);
 app.use("/api/targets", targetRoute);
 app.use("/api/lists", listRoute);

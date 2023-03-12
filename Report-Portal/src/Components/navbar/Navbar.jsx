@@ -8,59 +8,57 @@ import { AuthContext } from "../../context/authContext/AuthContext";
 // import { AuthContext } from "../../authContext/AuthContext";
 // import { logout } from "../../authContext/AuthActions";
 
-
 const Navbar = () => {
   const { user, dispatch } = useContext(AuthContext);
   const [isScrolled, setIsScrolled] = useState(false);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-//   const { dispatch } = useContext(AuthContext);
+  //   const { dispatch } = useContext(AuthContext);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
   return (
-     <nav className="navbar navbar-expand-lg backg">
+    <nav className="navbar navbar-expand-lg backg">
       <div className="container">
-        
-
-       
         <div href="#" className="navbar-brand logo-brand">
-        <Link to='/'>
-        <img src="/assets/images/frontpage-logo.png.png" className="logo"/>
-        </Link>
-        <h3 className="logo-text">Portal</h3>
+          <Link to="/">
+            <img src="/assets/images/frontpage-logo.png.png" className="logo" />
+          </Link>
+          <h3 className="logo-text">SBU Portal</h3>
         </div>
 
-        <div className="navbar" >
-
+        <div className="navbar">
           <div className="right ms-auto">
-         <Notifications className="icon" />
-          <img
-             src={user.profilePic ? user.profilePic :PF + "profile/avatar.png" }
-            alt=""
-         />
-         <div className="profile">
-            <ArrowDropDown className="icon text-white" />
-            <div className="options text-white">
-              <Link className="options-text text-white" to='/profile'>
-              <span>Profile</span>
-              </Link>
+            <Notifications className="icon" />
+            <img
+              src={
+                user.profilePic ? user.profilePic : PF + "profile/avatar.png"
+              }
+              alt=""
+            />
+            <div className="profile">
+              <ArrowDropDown className="icon text-white" />
+              <div className="options text-white">
+                <Link className="options-text text-white" to="/profile">
+                  <span>Profile</span>
+                </Link>
 
-             <Link className="options-text text-white" to='/settings'>
-             <span>Settings</span>
-             </Link>
-             <span onClick={() => dispatch(logout())}>Logout</span>
-              
+                <Link className="options-text text-white" to="/settings">
+                  <span>Settings</span>
+                </Link>
+                <span onClick={() => dispatch(logout())}>Logout</span>
+              </div>
+            </div>
+            <div className="profile">
+              <div className="text-white userinfo">
+                Hi <span className="text-warning">{user.fullname}</span>
+              </div>
             </div>
           </div>
-       </div>
         </div>
-
-
-        
       </div>
-     </nav>
+    </nav>
     // <div className={isScrolled ? "navbar scrolled" : "navbar"}>
     //   <div className="container">
     //     <div className="left">
@@ -68,7 +66,7 @@ const Navbar = () => {
     //             <img src="/assets/img/frontpage-logo.png" className="logo"/>
     //             Productivity Portal
     //       </div>
-         
+
     //       {/* <Link to="/" className="link">
     //       <span>Homepage</span>
     //       </Link>

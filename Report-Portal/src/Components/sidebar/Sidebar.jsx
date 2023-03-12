@@ -1,7 +1,7 @@
 import "./sidebar.scss";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from '../../context/authContext/AuthContext';
+import { AuthContext } from "../../context/authContext/AuthContext";
 import axios from "axios";
 import {
   PlayCircleFilledOutlined,
@@ -19,73 +19,98 @@ import { userData } from "../../dummyData";
 // import CloseFriend from "../closeFriend/CloseFriend";
 
 export default function Sidebar() {
-  const [ newUsers, setNewUsers ] = useState([]);
+  const [newUsers, setNewUsers] = useState([]);
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    const getNewUsers = async ()=> {
-        try{
-              const res = await axios.get("/users/all?new=true", {
-                headers: {
-                  token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-              });
-              setNewUsers(res.data);
-        }catch(err){
-          console.log(err);
-        }
-    }
-    getNewUsers();
-  }, [])
+  const axiosInstance = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+  });
 
-  
+  useEffect(() => {
+    const getNewUsers = async () => {
+      try {
+        const res = await axiosInstance.get("/users/all?new=true", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        setNewUsers(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getNewUsers();
+  }, []);
+
   return (
     <div className="sidebar1">
       <div className="sidebarWrapper">
         <ul className="sidebarList">
           <li className="sidebarListItem">
-          <Link to="/" className="messengerLink">
-            <House className="sidebarIcon" />
-            
-            <span className="sidebarListItemText">Home</span>
+            <Link to="/" className="messengerLink">
+              <House className="sidebarIcon" />
+
+              <span className="sidebarListItemText">Home</span>
             </Link>
           </li>
           <li className="sidebarListItem">
             {/* {user?.isFan === true ? "" : */}
-            <Link to="/create-report" className="messengerLink">
-            <Add className="sidebarIcon" />
-            
-            <span className="sidebarListItemText others" >Create Report</span>
+            <Link
+              className="messengerLink"
+              to={{
+                pathname: `/create-report/${user.fullname}`,
+                user: user,
+              }}
+            >
+              <Add className="sidebarIcon" />
+
+              <span className="sidebarListItemText others">Create Report</span>
             </Link>
             {/* }      */}
           </li>
           <li className="sidebarListItem">
-          <Link to="/score-card" className="messengerLink">
-            <PlayCircleFilledOutlined className="sidebarIcon" />
-           
-            <span className="sidebarListItemText others">Scorecard</span>
+            <Link
+              to={{
+                pathname: `/daily-report/${user.fullname}`,
+                user: user,
+              }}
+              className="messengerLink"
+            >
+              <PlayCircleFilledOutlined className="sidebarIcon" />
+
+              <span className="sidebarListItemText others">Daily Report</span>
             </Link>
           </li>
           <li className="sidebarListItem">
-          <Link to="/appraisals" className="messengerLink">
-            <CardGiftcard className="sidebarIcon" />
-           
-            <span className="sidebarListItemText">Appraisals</span>
+            <Link to="/appraisals" className="messengerLink">
+              <CardGiftcard className="sidebarIcon" />
+
+              <span className="sidebarListItemText">Appraisals</span>
             </Link>
           </li>
           <li className="sidebarListItem">
-          <Link to="/announcements" className="messengerLink">
-            <Group className="sidebarIcon" />
-            
-            <span className="sidebarListItemText">Announcements</span>
+            <Link to="/announcements" className="messengerLink">
+              <Group className="sidebarIcon" />
+
+              <span className="sidebarListItemText">Announcements</span>
             </Link>
           </li>
           <li className="sidebarListItem">
-          <Link to="/testimony" className="messengerLink">
-            <Group className="sidebarIcon" />
-            
-            <span className="sidebarListItemText">Testimony</span>
+            <Link to="/testimony" className="messengerLink">
+              <Group className="sidebarIcon" />
+
+              <span className="sidebarListItemText">Testimony</span>
             </Link>
+          </li>
+          <li className="sidebarListItem">
+            {user.adminrights === 1 || user.adminrights ? (
+              <Link to="/unitmembers">
+                <h4 className="sidebarTitle">Unit Members</h4>
+              </Link>
+            ) : (
+              ""
+            )}
           </li>
           {/* <li className="sidebarListItem">
             
@@ -117,40 +142,40 @@ export default function Sidebar() {
 
           <button className="sidebarButton">Show More</button> */}
         </ul>
-        
-        <hr className="sidebarHr" />
-       {user.isAdmin == true ? <div>
 
-        <h4 className="sidebarTitle">All Members</h4>
-        <ul className="sidebarFriendList">
-          {/* {newUsers.map((u) => (
+        <hr className="sidebarHr" />
+        {user.isAdmin == true ? (
+          <div>
+            <h4 className="sidebarTitle">Admin Section</h4>
+            <ul className="sidebarFriendList">
+              {/* {newUsers.map((u) => (
             <div key={u._id}>
                <Online user={u} />
             </div>
            
           ))} */}
-        </ul>
-        
-        <hr />
-        
-        <Link to='/newuser'>
-        <h4 className="sidebarTitle">Create Users</h4>
-        </Link>
-        <Link to='/members'>
-        <h4 className="sidebarTitle">Members</h4>
-        </Link>
-        
-        <h4 className="sidebarTitle">Reports</h4>
-        <h4 className="sidebarTitle">Notifications</h4>
-        <div className="challengeLeft"> 
-            <Link to="/challenge-page">
-            <Announcement />
-           </Link>
-          </div>
+            </ul>
 
-       </div> : ''}
-       
-          
+            <hr />
+
+            <Link to="/newuser">
+              <h4 className="sidebarTitle">Create Users</h4>
+            </Link>
+            <Link to="/members">
+              <h4 className="sidebarTitle">Members</h4>
+            </Link>
+
+            <h4 className="sidebarTitle">Reports</h4>
+            <h4 className="sidebarTitle">Notifications</h4>
+            <div className="challengeLeft">
+              <Link to="/challenge-page">
+                <Announcement />
+              </Link>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

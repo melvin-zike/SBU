@@ -1,64 +1,69 @@
 @import "../../app.scss";
 
-.backg{
+.backg {
   background-color: var(--main-color);
-  
 }
-.logo-brand{
+.logo-brand {
   display: flex;
   color: white;
 }
-.logo{
+.logo {
   width: 50px;
   height: 50px;
   margin-right: 8px;
 }
-.logo-text{
+.logo-text {
   margin-top: 10px;
 }
-.options-text{
+.options-text {
   margin-top: 4px;
   text-decoration: none;
 }
 .right {
-        display: flex;
-        align-items: center;
-  
-        .icon {
-          margin: 0px 15px;
-          color: white;
-          cursor: pointer;
-        }
-  
-        img {
-          width: 30px;
-          height: 30px;
-          border-radius: 5px;
-          object-fit: cover;
-          cursor: pointer;
-        }
-  
-        .profile {
-          margin-left: -5px;
-          margin-top: 5px;
-          .options {
-            display: none;
-            background-color: var(--main-color);
-            border-radius: 5px;
-            z-index: 1;
-          }
-  
-          span {
-            padding: 10px;
-            cursor: pointer;
-          }
-  
-          &:hover {
-            .options {
-              display: flex;
-              flex-direction: column;
-              position: absolute;
-            }
-          }
-        }
+  display: flex;
+  align-items: center;
+
+  .icon {
+    margin: 0px 15px;
+    color: white;
+    cursor: pointer;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .profile {
+    margin-left: -5px;
+    margin-top: 5px;
+    .options {
+      display: none;
+      background-color: var(--main-color);
+      border-radius: 5px;
+      z-index: 1;
+    }
+
+    span {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .userinfo {
+      @include mobile {
+        display: none;
       }
+    }
+
+    &:hover {
+      .options {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+      }
+    }
+  }
+}
